@@ -42,7 +42,7 @@ const Home = ({darkmode, searchCountries, found, isLoading, onlineData, errorMsg
           {errorMsg ? <h1>{errorMsg}</h1> 
           :
           found.map((val, i) => (
-            <div onClick={() => handleDetails(i)} style={{height: "340px", width: "250px"}} className={darkmode? "card col-lg-3 col-md-6 m-4 col-sm-12 nav-navy shadow-lg card-pad" : "card col-lg-3 m-4 col-sm-12 nav-light shadow-lg card-pad"} key={i}>
+            <div onClick={() => handleDetails(i)} style={{height: "340px", width: "230px"}} className={darkmode? "card col-lg-3 col-md-6 m-3 col-sm-12 nav-navy shadow-lg card-pad" : "card col-lg-3 m-3 col-sm-12 nav-light shadow-lg card-pad"} key={i}>
                 <img className="card-img-top" style={{height: '180px'}} src={val.flags.png} alt={val.name.common}/>
                 <div className={darkmode ? " bg-navy card-body" : 'bg-light card-body'}>
                     <h4 className="card-title">{val.name.common}</h4>
@@ -59,7 +59,7 @@ const Home = ({darkmode, searchCountries, found, isLoading, onlineData, errorMsg
               {errorMsg ? <h1>{errorMsg}</h1> 
               :
               onlineData.map((val, i) => (
-                <div onClick={() => handleDetails(i)} style={{height: "340px", width: "250px"}} className={darkmode? "card col-lg-3 col-md-6 m-4 col-sm-12 nav-navy shadow-lg card-pad" : "card col-lg-3 m-4 col-sm-12 nav-light shadow-lg card-pad"} key={i}>
+                <div onClick={() => handleDetails(i)} style={{height: "340px", width: "230px"}} className={darkmode? "card col-lg-3 col-md-6 m-3 col-sm-12 nav-navy shadow-lg card-pad" : "card col-lg-3 m-3 col-sm-12 nav-light shadow-lg card-pad"} key={i}>
                     <img className="card-img-top" style={{height: '180px'}} src={val.flags.png} alt={val.name.common}/>
                     <div className={darkmode ? " bg-navy card-body" : 'bg-light card-body'}>
                         <h4 className="card-title">{val.name.common}</h4>
