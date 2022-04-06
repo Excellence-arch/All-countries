@@ -1,26 +1,70 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react'
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import Home from './components/Home';
+import axios from 'axios';
+import NavBar from './components/NavBar';
+import Cards from './components/Cards';
 
-function App() {
+const App = () => {
+  const [darkmode, setDarkmode] = useState(false);
+  const [url, setUrl] = useState("https://restcountries.com/v3.1/all/?");
+  const [onlineData, setOnlineData] = useState([]);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [found, setFound] = useState([]);
+  const [searching, setSearching] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get(url).then(res => {
+      setIsLoading(false);
+      setErrorMsg("");
+      setOnlineData(res.data);
+    }).catch(err => {
+      setIsLoading(false);
+        setErrorMsg(err.message);
+    })
+  }, [url])
+
+  const changeUrl = (newUrl) => {
+    setUrl(newUrl)
+  }
+
+  const searchCountries = (userInput) => {
+    if(userInput) {
+      const filteredCountries = onlineData.filter((country) => (
+        Object.values(country).join("").toLowerCase().includes(userInput.toLowerCase())
+      ))
+      // console.log(filteredCountries)
+      setFound(filteredCountries);
+    } else {
+      setFound(onlineData);
+    }
+  }
+
+  const changeMode = () => {
+    setDarkmode(!darkmode);
+  }
+
+  const showDets = (i) => {
+    navigate(`/${i}`);
+  }
+
+  // const refreshPage = () => {
+  //   window.location.reload();
+  //   // setUrl(url);
+  // }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={darkmode ? 'bg-navy bg-real-light text-white' : 'bg-light bg-real-light text-dark'}>
+      <NavBar  darkmode={darkmode} changeMode={changeMode}/>
+      <Routes>
+        <Route path="/" element={<Home darkmode={darkmode} searchCountries={searchCountries} isLoading={isLoading} showDets={showDets} changeUrl={changeUrl} onlineData={onlineData} errorMsg={errorMsg} found={found} />}/>
+        <Route path="/:id" element={<Cards darkmode={darkmode} onlineData={found.length> 0 ? found : onlineData}/>}/>
+      </Routes>
     </div>
-  );
+  )
 }
 
 export default App;

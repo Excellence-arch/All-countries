@@ -11,3 +11,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.bg-navy {
+  background-color: rgb(33,46,55) !important;
+  border: 0 !important;
+  /* width: 100%; */
+}
+
+.nav-navy {
+  background-color: rgb(43,55,67) !important;
+  border: 0 !important;
+}
+
+.flexed {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-pad {
+  padding: 0 !important;
+}
+
+.bg-real-light {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.bg-real {
+  width: 100vw !important;
+  height: 100vh !important;
+}
