@@ -6,15 +6,19 @@ import NavBar from './components/NavBar';
 import Cards from './components/Cards';
 
 const App = () => {
-  const [darkmode, setDarkmode] = useState(false);
+  const [darkmode, setDarkmode] = useState("");
   const [url, setUrl] = useState("https://restcountries.com/v3.1/all/?");
   const [onlineData, setOnlineData] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [found, setFound] = useState([]);
-  const [searching, setSearching] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.darkmode ? setDarkmode(JSON.parse(localStorage.darkmode)) : setDarkmode(false);
+    // console.log(darkmode);
+  }, []);
 
   useEffect(() => {
     axios.get(url).then(res => {
@@ -28,7 +32,9 @@ const App = () => {
   }, [url])
 
   const changeUrl = (newUrl) => {
-    setUrl(newUrl)
+    setIsLoading(true);
+    setErrorMsg(false);
+    setUrl(newUrl);
   }
 
   const searchCountries = (userInput) => {
@@ -44,7 +50,10 @@ const App = () => {
   }
 
   const changeMode = () => {
-    setDarkmode(!darkmode);
+    setDarkmode(() => {
+      localStorage.darkmode = JSON.stringify(!darkmode);
+      return !darkmode;
+    });
   }
 
   const showDets = (i) => {
@@ -60,7 +69,7 @@ const App = () => {
     <div className={darkmode ? 'bg-navy bg-real-light text-white' : 'bg-light bg-real-light text-dark'}>
       <NavBar  darkmode={darkmode} changeMode={changeMode}/>
       <Routes>
-        <Route path="/" element={<Home darkmode={darkmode} searchCountries={searchCountries} isLoading={isLoading} showDets={showDets} changeUrl={changeUrl} onlineData={onlineData} errorMsg={errorMsg} found={found} />}/>
+        <Route path="/" element={<Home darkmode={darkmode} searchCountries={searchCountries} isLoading={isLoading} url={url} showDets={showDets} changeUrl={changeUrl} onlineData={onlineData} errorMsg={errorMsg} found={found} />}/>
         <Route path="/:id" element={<Cards darkmode={darkmode} onlineData={found.length> 0 ? found : onlineData}/>}/>
       </Routes>
     </div>
