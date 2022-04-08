@@ -29,9 +29,10 @@ const Cards = ({darkmode, onlineData}) => {
                     </div>
                     <div className="col-6">
                     <p><span className='h6'>Top Level Domain:</span> {onlineData[id].tld[0]}</p>
-                    {/* <p><span className='h6'>Currencies:</span> {onlineData[id].currencies.name}</p> */}
-                    {/* <p><span className='h6'>Languages:</span> {onlineData[id].languages}</p> */}
+                    <p><span className='h6'>Currencies:</span> {Object.values(onlineData[id].currencies).map((val, j) => <span key={j}>{val.name},</span>)}</p>
+                    <p><span className='h6'>Languages:</span> {Object.values(onlineData[id].languages).map((val, k) => <span key={k}>{val},</span>)}</p>
                     </div>
+                    {/* <p>{}</p> */}
                 </div>
             </div>
         </div>

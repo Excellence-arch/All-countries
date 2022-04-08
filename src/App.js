@@ -66,7 +66,7 @@ const App = () => {
   // }
 
   return (
-    <div className={darkmode ? 'bg-navy bg-real-light text-white' : 'bg-light bg-real-light text-dark'}>
+    <div className={darkmode ? 'bg-navy bg-real-light bg-real text-white' : 'bg-light bg-real-light text-dark'}>
       <NavBar  darkmode={darkmode} changeMode={changeMode}/>
       <Routes>
         <Route path="/" element={<Home darkmode={darkmode} searchCountries={searchCountries} isLoading={isLoading} url={url} showDets={showDets} changeUrl={changeUrl} onlineData={onlineData} errorMsg={errorMsg} found={found} />}/>

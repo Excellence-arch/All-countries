@@ -43,7 +43,7 @@ const Home = ({darkmode, searchCountries, found, isLoading, onlineData, errorMsg
             
             {found.length > 0 ? 
           <div className={darkmode ? "bg-navy text-center row p-3" : "text-center bg-light row p-3"}>
-          {errorMsg ? <div className="bg-real"><h1>{errorMsg}</h1></div>
+          {errorMsg ? <h1>{errorMsg}</h1>
           :
           found.map((val, i) => (
             <div onClick={() => handleDetails(i)} style={{height: "340px", width: "230px"}} className={darkmode? "card col-lg-3 col-md-6 m-3 col-sm-12 nav-navy shadow-lg card-pad" : "card col-lg-3 m-3 col-sm-12 nav-light shadow-lg card-pad"} key={i}>
